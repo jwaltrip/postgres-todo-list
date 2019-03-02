@@ -2,67 +2,41 @@ import React, { Component } from "react";
 import {
   Container,
   ListGroup,
-  ListGroupItem,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input
 } from "reactstrap";
+import TodoItem from './TodoItem';
+import TodoHeaderForm from "./TodoHeaderForm";
 
 class TodoList extends Component {
-  state = {};
+  state = {
+    todos: [
+      {
+        id: 1,
+        taskName: "Task 1"
+      },
+      {
+        id: 2,
+        taskName: "Task 2"
+      },
+      {
+        id: 3,
+        taskName: "Task 3"
+      },
+    ]
+  };
 
   render() {
+    const { todos } = this.state;
+    
     return (
       <div>
         <Container>
           <div className="d-flex justify-content-center">
             <ListGroup className="text-left w-50">
-              <ListGroupItem className="todo-form-header">
-                <Form>
-                  <FormGroup>
-                    <h5 className="text-center">Add To-Do</h5>
-                    <div className="add-todo-form">
-                      <Input type="text" name="text" id="addTodo" placeholder="Add an item to the list..." />
-                      <Button color="success">Add Todo</Button>
-                    </div>
-                  </FormGroup>
-                </Form>
-              </ListGroupItem>
+              <TodoHeaderForm />
               
-              <ListGroupItem>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="todo-text">Jerk off</div>
-                  <div className="todo-remove-btn">
-                    <Button color="danger" size="sm">
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              </ListGroupItem>
-  
-              <ListGroupItem>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="todo-text">Wait 15 min</div>
-                  <div className="todo-remove-btn">
-                    <Button color="danger" size="sm">
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              </ListGroupItem>
-  
-              <ListGroupItem>
-                <div className="d-flex flex-row align-items-center">
-                  <div className="todo-text">Repeat</div>
-                  <div className="todo-remove-btn">
-                    <Button color="danger" size="sm">
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              </ListGroupItem>
+              {todos && todos.map((todo, idx) => {
+                return <TodoItem key={idx} taskName={todo.taskName} />
+              })}
             </ListGroup>
           </div>
         </Container>
