@@ -33,10 +33,12 @@ class App extends Component {
       newState.todos = [newTodo, ...newState.todos];
       this.setState(newState);
     }
-    
-    // this.setState({
-    //   todos: [todo, ...this.state.todos]
-    // });
+  };
+  
+  handleRemoveTask = (idx) => {
+    const newState = {...this.state};
+    newState.todos.splice(idx, 1);
+    this.setState(newState);
   };
 
   render() {
@@ -45,6 +47,7 @@ class App extends Component {
         <TodoList
           todos={this.state.todos}
           handleAddTodo={this.handleAddTodo}
+          handleRemoveTask={this.handleRemoveTask}
         />
       </div>
     );

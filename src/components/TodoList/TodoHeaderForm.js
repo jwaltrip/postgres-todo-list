@@ -12,11 +12,22 @@ class TodoHeaderForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   
+  onSubmitTask = (e) => {
+    e.preventDefault();
+  
+    const { taskInputText } = this.state;
+    const { addTodo } = this.props;
+    
+    addTodo(taskInputText);
+    this.setState({ taskInputText: '' });
+  };
+  
   render() {
     const { taskInputText } = this.state;
+
     return (
       <ListGroupItem className="todo-form-header">
-        <Form>
+        <Form onSubmit={this.onSubmitTask}>
           <FormGroup>
             <h5 className="text-center">Add To-Do</h5>
             <div className="add-todo-form">
@@ -28,7 +39,7 @@ class TodoHeaderForm extends React.Component {
                 onChange={this.onTextChange}
                 value={taskInputText}
               />
-              <Button color="success" onClick={() => this.props.addTodo(taskInputText)}>Add Todo</Button>
+              <Button color="success" onClick={this.onSubmitTask}>Add Todo</Button>
             </div>
           </FormGroup>
         </Form>
@@ -36,20 +47,5 @@ class TodoHeaderForm extends React.Component {
     );
   }
 }
-
-// () => {
-//   const createTodoObj = () => {
-//     if (inputText) {
-//       addTodo({
-//         id: new Date(),
-//         taskName: inputText
-//       });
-//     }
-//   };
-//
-//   return (
-//
-//   );
-// };
 
 export default TodoHeaderForm;
